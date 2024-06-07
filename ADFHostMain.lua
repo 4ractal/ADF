@@ -165,7 +165,7 @@ if autofarm then
 
         task.spawn(function()
             while true do
-                if guipages.MatchResultPage.Visible or tonumber(lpgui:FindFirstChild('WaveTopBar').Wave.WaveFrame.TextLabel.Text) >= leaveatwave then
+                if guipages.MatchResultPage.Visible then
                     actionRemote:FireServer(unpack(leaveGameServerArgs))
                     if webhook then
                         local finishmatch = {
