@@ -51,19 +51,6 @@ local function firehook(themessage)
     end)
 end
 
-local teleportedout = {
-    content = nil,
-    embeds = { {
-      title = "Error!",
-      description = lp.Name .. " disconnected and requested to teleport back to lobby.",
-      color = math.random(1, 16777214),
-      footer = {
-        text = string.format("Logged: %s (UTC)", DateTime.now():FormatUniversalTime("LTS", "en-us"))
-      }
-    } },
-    attachments = { }
-}
-
 ------------------------------------
 
 local leaveGameServerArgs = {
@@ -128,6 +115,19 @@ if botfarmenabled and leader then
 
         if not lpgui:FindFirstChild('PAGES') then
             if webhook then
+                local teleportedout = {
+                    content = nil,
+                    embeds = { {
+                      title = "Error!",
+                      description = lp.Name .. " disconnected and requested to teleport back to lobby.",
+                      color = math.random(1, 16777214),
+                      footer = {
+                        text = string.format("Logged: %s (UTC)", DateTime.now():FormatUniversalTime("LTS", "en-us"))
+                      }
+                    } },
+                    attachments = { }
+                }
+
                 firehook(teleportedout)
             end
             game:GetService('TeleportService'):Teleport(17017769292)
