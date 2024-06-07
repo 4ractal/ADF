@@ -11,7 +11,7 @@ getgenv().friendsonly = friendsonly or false
 getgenv().mission = mission or "FooshaVillage_Infinite"   
 getgenv().normalorhard = normalorhard or "Hard"            
 getgenv().antiafk = antiafk or true                     
-getgenv().dontrender = dontrender or true                    
+getgenv().dontrender = dontrender or false                    
 getgenv().webhook = webhook or nil
 
 --------------important paths------------------------
