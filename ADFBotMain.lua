@@ -1,10 +1,10 @@
-
 --------------settings--------------
 
 getgenv().botfarmenabled = botfarmenabled or true         
 getgenv().antiafk = antiafk or true                   
 getgenv().checkForResultsDelay = checkForResultsDelay or 5          
 getgenv().dontrender = dontrender or true
+getgenv().leader = leader or nil 
 getgenv().webhook = webhook or nil
 
 ----------------------------------
@@ -73,7 +73,7 @@ local leaveGameServerArgs = {
 
 ------------------------------------
 
-if botfarmenabled then
+if botfarmenabled and leader then
     if dontrender then
         task.spawn(function()
             task.wait(1)
@@ -108,7 +108,7 @@ if botfarmenabled then
         
         repeat 
             task.wait(1)
-        until lpgui.UI.GUIs:FindFirstChild('p0wley', true)
+        until lpgui.UI.GUIs:FindFirstChild(leader, true)
        
         task.spawn(function()
             while true do
