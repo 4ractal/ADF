@@ -60,56 +60,6 @@ local function firehook(themessage)
     end)
 end
 
-local finishmatch = {
-    content = nil,
-    embeds = { {
-        title = "Match Finished!",
-        color = math.random(1, 16777214),
-        fields = { {
-        name = "No. of Players:",
-        value = tostring(#game:GetService("Players"):GetPlayers()),
-        inline = true
-        }, {
-        name = "Waves Completed:",
-        value = lpgui.WaveTopBar.Wave.WaveFrame.TextLabel.Text,
-        inline = true
-        }, {
-        name = "Time Taken:",
-        value = guipages.MatchResultPage.Main.Statistics.Time.CategoryStat.Text,
-        inline = true
-        } },
-        footer = {
-        text = string.format("Logged: %s (UTC)", DateTime.now():FormatUniversalTime("LTS", "en-us"))
-        }
-    } },
-    username = "gems machine",
-    avatar_url = "https://img.freepik.com/premium-photo/pile-colorful-gemstones-with-word-diamond-bottom_836919-2575.jpg",
-    attachments = { }
-}
-
-local matchteleporting = {
-    content = nil,
-    embeds = { {
-      title = "Attempting Match Teleport...",
-      color = math.random(1, 16777214),
-      fields = { {
-        name = "Current Gems:",
-        value = lpgui.HUD.Toolbar.CurrencyList.Gems.TextLabel.Text,
-        inline = true
-      }, {
-        name = "Quests to Claim:",
-        value = "W.I.P.",
-        inline = true
-      } },
-      footer = {
-        text = string.format("Logged: %s (UTC)", DateTime.now():FormatUniversalTime("LTS", "en-us"))
-      }
-    } },
-    username = "gems machine",
-    avatar_url = "https://img.freepik.com/premium-photo/pile-colorful-gemstones-with-word-diamond-bottom_836919-2575.jpg",
-    attachments = { }
-}
-
 -----------remote arg tables--------------------------
 
 local gameSettingsArgs = {
@@ -181,6 +131,29 @@ if autofarm then
         actionRemote:FireServer(unpack(startServerTeleportArgs))
 
         if webhook then
+            local matchteleporting = {
+                content = nil,
+                embeds = { {
+                  title = "Attempting Match Teleport...",
+                  color = math.random(1, 16777214),
+                  fields = { {
+                    name = "Current Gems:",
+                    value = lpgui.HUD.Toolbar.CurrencyList.Gems.TextLabel.Text,
+                    inline = true
+                  }, {
+                    name = "Quests to Claim:",
+                    value = "W.I.P.",
+                    inline = true
+                  } },
+                  footer = {
+                    text = string.format("Logged: %s (UTC)", DateTime.now():FormatUniversalTime("LTS", "en-us"))
+                  }
+                } },
+                username = "gems machine",
+                avatar_url = "https://img.freepik.com/premium-photo/pile-colorful-gemstones-with-word-diamond-bottom_836919-2575.jpg",
+                attachments = { }
+            }
+
             firehook(matchteleporting)
         end
     elseif table.find(serverIds, placeId) then                                  --else if place is in the whitelisted table of ids
@@ -195,6 +168,33 @@ if autofarm then
                 if guipages.MatchResultPage.Visible or tonumber(lpgui:FindFirstChild('WaveTopBar').Wave.WaveFrame.TextLabel.Text) >= leaveatwave then
                     actionRemote:FireServer(unpack(leaveGameServerArgs))
                     if webhook then
+                        local finishmatch = {
+                            content = nil,
+                            embeds = { {
+                                title = "Match Finished!",
+                                color = math.random(1, 16777214),
+                                fields = { {
+                                name = "No. of Players:",
+                                value = tostring(#game:GetService("Players"):GetPlayers()),
+                                inline = true
+                                }, {
+                                name = "Waves Completed:",
+                                value = lpgui.WaveTopBar.Wave.WaveFrame.TextLabel.Text,
+                                inline = true
+                                }, {
+                                name = "Time Taken:",
+                                value = guipages.MatchResultPage.Main.Statistics.Time.CategoryStat.Text,
+                                inline = true
+                                } },
+                                footer = {
+                                text = string.format("Logged: %s (UTC)", DateTime.now():FormatUniversalTime("LTS", "en-us"))
+                                }
+                            } },
+                            username = "gems machine",
+                            avatar_url = "https://img.freepik.com/premium-photo/pile-colorful-gemstones-with-word-diamond-bottom_836919-2575.jpg",
+                            attachments = { }
+                        }
+
                         firehook(finishmatch)
                     end
                     break
@@ -202,7 +202,6 @@ if autofarm then
                 task.wait(checkForResultsDelay)
             end
         end)
-
 
         repeat
             task.wait(1) 
