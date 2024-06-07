@@ -23,6 +23,7 @@ local moduleScript = game:GetService("ReplicatedStorage").Actions
 local actionRemote = moduleScript.Action
 local encryptedRemotes = {}
 
+local playersinserv = #game:GetService("Players"):GetPlayers()
 local lp = game:GetService('Players').LocalPlayer
 local char = lp.Character or lp.CharacterAdded:Wait()
 local lpgui = lp.PlayerGui
@@ -175,7 +176,7 @@ if autofarm then
                                 color = math.random(1, 16777214),
                                 fields = { {
                                 name = "No. of Players:",
-                                value = tostring(#game:GetService("Players"):GetPlayers()),
+                                value = tostring(playersinserv),
                                 inline = true
                                 }, {
                                 name = "Waves Completed:",
